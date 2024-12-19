@@ -1,0 +1,1450 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coxhyde Ranking</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <style>
+        /* General table styling */
+        table.display {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table.display thead th {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+        }
+        /* Zebra striping */
+        #table1 tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+        #table1 tbody tr:nth-child(even) {
+            background-color: #fff9c4;
+        }
+        #table2 tbody tr:nth-child(odd), #table3 tbody tr:nth-child(odd), #table4 tbody tr:nth-child(odd) {
+            background-color: #e3f2fd; /* Light blue */
+        }
+        #table2 tbody tr:nth-child(even), #table3 tbody tr:nth-child(even), #table4 tbody tr:nth-child(even) {
+            background-color: #ffffff; /* White */
+        }
+        #table2 tbody td:nth-child(5), #table3 tbody td:nth-child(3), #table4 tbody td:nth-child(3) {
+            font-weight: bold; /* Apply bold to column 5 */
+        }
+        #table2 tbody tr > :first-child(5){
+        position: sticky;
+        }
+
+
+        /* Scroll wrapper styling for Tables 2, 3, and 4 */
+        div.dataTables_wrapper {
+            width: 100%;
+            overflow: auto;
+        }
+
+        /* Button styling */
+        .filter-buttons {
+            margin-bottom: 10px;
+        }
+        .filter-buttons button {
+            padding: 5px 10px;
+            margin-right: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .filter-buttons button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div style="margin: 20px;">
+        <h1>Globaal overzicht</h1>
+        <table border="1" class="dataframe display nowrap" id="table1">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Naam</th>
+      <th>Klasse</th>
+      <th>Wedstrijden</th>
+      <th>Tot. T. MAX</th>
+      <th>Tot. Score</th>
+      <th>%</th>
+      <th>Gem. RP</th>
+      <th>Tot. punten</th>
+      <th>Scrabbles</th>
+      <th>Solo's</th>
+      <th>S.scr</th>
+      <th>Nulscores</th>
+      <th>Tot. beurten</th>
+      <th>Max. scores</th>
+      <th>% max.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>BOSGAERD Viv</td>
+      <td>B</td>
+      <td>5</td>
+      <td>4763</td>
+      <td>2922</td>
+      <td>61.35</td>
+      <td>66.48</td>
+      <td>25</td>
+      <td>4</td>
+      <td>1</td>
+      <td>0</td>
+      <td>11</td>
+      <td>104</td>
+      <td>18</td>
+      <td>17.31</td>
+    </tr>
+    <tr>
+      <td>CLOETENS Annelies</td>
+      <td>A</td>
+      <td>10</td>
+      <td>9407</td>
+      <td>6722</td>
+      <td>71.46</td>
+      <td>82.39</td>
+      <td>76</td>
+      <td>17</td>
+      <td>3</td>
+      <td>0</td>
+      <td>19</td>
+      <td>212</td>
+      <td>67</td>
+      <td>31.60</td>
+    </tr>
+    <tr>
+      <td>COENE Dominique</td>
+      <td>A</td>
+      <td>10</td>
+      <td>9564</td>
+      <td>7156</td>
+      <td>74.82</td>
+      <td>85.03</td>
+      <td>82</td>
+      <td>21</td>
+      <td>4</td>
+      <td>1</td>
+      <td>19</td>
+      <td>210</td>
+      <td>79</td>
+      <td>37.62</td>
+    </tr>
+    <tr>
+      <td>D'HONDT Kristof</td>
+      <td>B</td>
+      <td>13</td>
+      <td>12375</td>
+      <td>8622</td>
+      <td>69.67</td>
+      <td>77.39</td>
+      <td>77</td>
+      <td>23</td>
+      <td>5</td>
+      <td>2</td>
+      <td>11</td>
+      <td>272</td>
+      <td>59</td>
+      <td>21.69</td>
+    </tr>
+    <tr>
+      <td>FARASYN Kurt</td>
+      <td>A</td>
+      <td>15</td>
+      <td>14110</td>
+      <td>10831</td>
+      <td>76.76</td>
+      <td>89.11</td>
+      <td>132</td>
+      <td>30</td>
+      <td>13</td>
+      <td>1</td>
+      <td>17</td>
+      <td>315</td>
+      <td>119</td>
+      <td>37.78</td>
+    </tr>
+    <tr>
+      <td>FINAUT Patrick</td>
+      <td>B</td>
+      <td>8</td>
+      <td>7869</td>
+      <td>4771</td>
+      <td>60.63</td>
+      <td>69.65</td>
+      <td>37</td>
+      <td>9</td>
+      <td>1</td>
+      <td>0</td>
+      <td>8</td>
+      <td>166</td>
+      <td>24</td>
+      <td>14.46</td>
+    </tr>
+    <tr>
+      <td>GHYSELS Marc</td>
+      <td>B</td>
+      <td>9</td>
+      <td>8391</td>
+      <td>4915</td>
+      <td>58.57</td>
+      <td>67.72</td>
+      <td>36</td>
+      <td>14</td>
+      <td>6</td>
+      <td>0</td>
+      <td>28</td>
+      <td>195</td>
+      <td>34</td>
+      <td>17.44</td>
+    </tr>
+    <tr>
+      <td>HERWEIJER Catharina</td>
+      <td>B</td>
+      <td>9</td>
+      <td>8414</td>
+      <td>4028</td>
+      <td>47.87</td>
+      <td>58.06</td>
+      <td>14</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>10</td>
+      <td>189</td>
+      <td>14</td>
+      <td>7.41</td>
+    </tr>
+    <tr>
+      <td>MEURRENS Rita</td>
+      <td>A</td>
+      <td>10</td>
+      <td>9826</td>
+      <td>7593</td>
+      <td>77.27</td>
+      <td>87.74</td>
+      <td>88</td>
+      <td>23</td>
+      <td>6</td>
+      <td>2</td>
+      <td>13</td>
+      <td>208</td>
+      <td>84</td>
+      <td>40.38</td>
+    </tr>
+    <tr>
+      <td>PETRACCA Marilyn</td>
+      <td>B</td>
+      <td>13</td>
+      <td>11964</td>
+      <td>7113</td>
+      <td>59.45</td>
+      <td>66.17</td>
+      <td>45</td>
+      <td>10</td>
+      <td>0</td>
+      <td>1</td>
+      <td>42</td>
+      <td>273</td>
+      <td>57</td>
+      <td>20.88</td>
+    </tr>
+    <tr>
+      <td>TORREELE Ronald</td>
+      <td>A</td>
+      <td>15</td>
+      <td>14110</td>
+      <td>11871</td>
+      <td>84.13</td>
+      <td>97.01</td>
+      <td>159</td>
+      <td>31</td>
+      <td>29</td>
+      <td>4</td>
+      <td>17</td>
+      <td>315</td>
+      <td>175</td>
+      <td>55.56</td>
+    </tr>
+    <tr>
+      <td>VANDENBERGHE Christine</td>
+      <td>B</td>
+      <td>13</td>
+      <td>12104</td>
+      <td>7553</td>
+      <td>62.40</td>
+      <td>66.45</td>
+      <td>53</td>
+      <td>12</td>
+      <td>7</td>
+      <td>0</td>
+      <td>17</td>
+      <td>274</td>
+      <td>55</td>
+      <td>20.07</td>
+    </tr>
+    <tr>
+      <td>VANDENBERGHE Riet</td>
+      <td>A</td>
+      <td>9</td>
+      <td>8560</td>
+      <td>6720</td>
+      <td>78.50</td>
+      <td>92.03</td>
+      <td>89</td>
+      <td>18</td>
+      <td>8</td>
+      <td>1</td>
+      <td>9</td>
+      <td>186</td>
+      <td>83</td>
+      <td>44.62</td>
+    </tr>
+    <tr>
+      <td>VANDESOMPELE Mireille</td>
+      <td>B</td>
+      <td>13</td>
+      <td>12394</td>
+      <td>6840</td>
+      <td>55.19</td>
+      <td>56.12</td>
+      <td>38</td>
+      <td>8</td>
+      <td>1</td>
+      <td>0</td>
+      <td>41</td>
+      <td>274</td>
+      <td>41</td>
+      <td>14.96</td>
+    </tr>
+    <tr>
+      <td>WYBO Monique</td>
+      <td>B</td>
+      <td>11</td>
+      <td>10218</td>
+      <td>6893</td>
+      <td>67.46</td>
+      <td>78.14</td>
+      <td>62</td>
+      <td>14</td>
+      <td>3</td>
+      <td>0</td>
+      <td>22</td>
+      <td>230</td>
+      <td>55</td>
+      <td>23.91</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+    <div style="margin: 20px;">
+        <h1>Ranking Percent</h1>
+        <div class="filter-buttons">
+            <button id="filter-A-2">A</button>
+            <button id="filter-B-2">B</button>
+            <button id="filter-all-2">Alle</button>
+        </div>
+        <table border="1" class="dataframe display nowrap" id="table2">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Naam</th>
+      <th>Klasse</th>
+      <th>Tot. T. MAX</th>
+      <th>Tot. Score</th>
+      <th>%</th>
+      <th>05/09/2024</th>
+      <th>12/09/2024</th>
+      <th>19/09/2024</th>
+      <th>26/09/2024</th>
+      <th>03/10/2024</th>
+      <th>10/10/2024</th>
+      <th>17/10/2024</th>
+      <th>24/10/2024</th>
+      <th>31/10/2024</th>
+      <th>05/11/2024</th>
+      <th>14/11/2024</th>
+      <th>21/11/2024</th>
+      <th>28/11/2024</th>
+      <th>05/12/2024</th>
+      <th>12/12/2024</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TORREELE Ronald</td>
+      <td>A</td>
+      <td>14110</td>
+      <td>11871</td>
+      <td>84.13</td>
+      <td>85.99</td>
+      <td>87.67</td>
+      <td>81.21</td>
+      <td>83.58</td>
+      <td>89.87</td>
+      <td>84.10</td>
+      <td>82.36</td>
+      <td>91.35</td>
+      <td>78.19</td>
+      <td>80.12</td>
+      <td>87.71</td>
+      <td>79.56</td>
+      <td>86.77</td>
+      <td>75.54</td>
+      <td>89.07</td>
+    </tr>
+    <tr>
+      <td>VANDENBERGHE Riet</td>
+      <td>A</td>
+      <td>8560</td>
+      <td>6720</td>
+      <td>78.50</td>
+      <td></td>
+      <td></td>
+      <td>78.32</td>
+      <td>82.08</td>
+      <td>86.38</td>
+      <td>75.94</td>
+      <td>78.39</td>
+      <td>76.27</td>
+      <td></td>
+      <td>88.94</td>
+      <td></td>
+      <td>68.59</td>
+      <td></td>
+      <td>72.91</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>MEURRENS Rita</td>
+      <td>A</td>
+      <td>9826</td>
+      <td>7593</td>
+      <td>77.27</td>
+      <td></td>
+      <td>78.13</td>
+      <td>65.99</td>
+      <td>87.98</td>
+      <td></td>
+      <td>71.27</td>
+      <td>80.43</td>
+      <td></td>
+      <td>76.95</td>
+      <td></td>
+      <td></td>
+      <td>75.98</td>
+      <td>76.52</td>
+      <td>79.76</td>
+      <td>80.39</td>
+    </tr>
+    <tr>
+      <td>FARASYN Kurt</td>
+      <td>A</td>
+      <td>14110</td>
+      <td>10831</td>
+      <td>76.76</td>
+      <td>85.25</td>
+      <td>82.21</td>
+      <td>78.03</td>
+      <td>89.81</td>
+      <td>80.28</td>
+      <td>76.84</td>
+      <td>55.05</td>
+      <td>68.96</td>
+      <td>73.94</td>
+      <td>78.59</td>
+      <td>82.48</td>
+      <td>77.71</td>
+      <td>78.60</td>
+      <td>64.39</td>
+      <td>83.12</td>
+    </tr>
+    <tr>
+      <td>COENE Dominique</td>
+      <td>A</td>
+      <td>9564</td>
+      <td>7156</td>
+      <td>74.82</td>
+      <td>80.09</td>
+      <td>75.72</td>
+      <td>73.31</td>
+      <td>84.55</td>
+      <td>79.85</td>
+      <td>71.77</td>
+      <td>76.45</td>
+      <td>68.63</td>
+      <td>69.99</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>70.20</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>CLOETENS Annelies</td>
+      <td>A</td>
+      <td>9407</td>
+      <td>6722</td>
+      <td>71.46</td>
+      <td>79.94</td>
+      <td>75.44</td>
+      <td>74.86</td>
+      <td></td>
+      <td></td>
+      <td>70.78</td>
+      <td>67.58</td>
+      <td>75.06</td>
+      <td>82.04</td>
+      <td></td>
+      <td></td>
+      <td>48.73</td>
+      <td>70.54</td>
+      <td></td>
+      <td>69.46</td>
+    </tr>
+    <tr>
+      <td>D'HONDT Kristof</td>
+      <td>B</td>
+      <td>12375</td>
+      <td>8622</td>
+      <td>69.67</td>
+      <td>71.39</td>
+      <td>74.24</td>
+      <td>66.28</td>
+      <td>77.79</td>
+      <td>65.69</td>
+      <td>68.19</td>
+      <td>76.25</td>
+      <td>62.64</td>
+      <td>72.59</td>
+      <td>72.71</td>
+      <td>72.44</td>
+      <td></td>
+      <td></td>
+      <td>59.04</td>
+      <td>68.00</td>
+    </tr>
+    <tr>
+      <td>WYBO Monique</td>
+      <td>B</td>
+      <td>10218</td>
+      <td>6893</td>
+      <td>67.46</td>
+      <td>60.77</td>
+      <td></td>
+      <td>73.03</td>
+      <td></td>
+      <td></td>
+      <td>62.62</td>
+      <td>54.03</td>
+      <td>58.20</td>
+      <td></td>
+      <td>66.24</td>
+      <td>82.48</td>
+      <td>61.20</td>
+      <td>79.52</td>
+      <td>63.54</td>
+      <td>78.44</td>
+    </tr>
+    <tr>
+      <td>VANDENBERGHE Christine</td>
+      <td>B</td>
+      <td>12104</td>
+      <td>7553</td>
+      <td>62.40</td>
+      <td>73.45</td>
+      <td>59.87</td>
+      <td>56.45</td>
+      <td>59.01</td>
+      <td>76.25</td>
+      <td>54.27</td>
+      <td></td>
+      <td>59.65</td>
+      <td>56.39</td>
+      <td>69.53</td>
+      <td>71.15</td>
+      <td>56.12</td>
+      <td>63.64</td>
+      <td>60.92</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>BOSGAERD Viv</td>
+      <td>B</td>
+      <td>4763</td>
+      <td>2922</td>
+      <td>61.35</td>
+      <td></td>
+      <td></td>
+      <td>65.03</td>
+      <td>59.66</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>65.52</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>51.96</td>
+      <td></td>
+      <td></td>
+      <td>63.41</td>
+    </tr>
+    <tr>
+      <td>FINAUT Patrick</td>
+      <td>B</td>
+      <td>7869</td>
+      <td>4771</td>
+      <td>60.63</td>
+      <td></td>
+      <td></td>
+      <td>72.64</td>
+      <td>63.84</td>
+      <td>50.76</td>
+      <td>66.20</td>
+      <td>59.53</td>
+      <td>58.31</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>51.55</td>
+      <td>61.46</td>
+    </tr>
+    <tr>
+      <td>PETRACCA Marilyn</td>
+      <td>B</td>
+      <td>11964</td>
+      <td>7113</td>
+      <td>59.45</td>
+      <td>65.63</td>
+      <td></td>
+      <td>58.09</td>
+      <td>74.46</td>
+      <td>54.03</td>
+      <td>44.93</td>
+      <td>51.78</td>
+      <td>53.88</td>
+      <td>54.41</td>
+      <td>66.82</td>
+      <td>73.08</td>
+      <td>51.85</td>
+      <td>61.33</td>
+      <td></td>
+      <td>65.46</td>
+    </tr>
+    <tr>
+      <td>GHYSELS Marc</td>
+      <td>B</td>
+      <td>8391</td>
+      <td>4915</td>
+      <td>58.57</td>
+      <td>61.36</td>
+      <td>70.99</td>
+      <td></td>
+      <td></td>
+      <td>62.53</td>
+      <td>57.75</td>
+      <td>45.57</td>
+      <td>73.17</td>
+      <td></td>
+      <td></td>
+      <td>55.77</td>
+      <td>55.31</td>
+      <td></td>
+      <td></td>
+      <td>45.85</td>
+    </tr>
+    <tr>
+      <td>VANDESOMPELE Mireille</td>
+      <td>B</td>
+      <td>12394</td>
+      <td>6840</td>
+      <td>55.19</td>
+      <td>65.19</td>
+      <td>41.15</td>
+      <td>49.33</td>
+      <td>55.79</td>
+      <td>53.92</td>
+      <td>60.54</td>
+      <td>57.08</td>
+      <td>63.19</td>
+      <td>55.56</td>
+      <td></td>
+      <td>61.86</td>
+      <td></td>
+      <td>48.22</td>
+      <td>51.45</td>
+      <td>59.12</td>
+    </tr>
+    <tr>
+      <td>HERWEIJER Catharina</td>
+      <td>B</td>
+      <td>8414</td>
+      <td>4028</td>
+      <td>47.87</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>61.33</td>
+      <td></td>
+      <td>43.83</td>
+      <td>45.79</td>
+      <td></td>
+      <td>40.71</td>
+      <td>44.66</td>
+      <td>45.73</td>
+      <td>57.31</td>
+      <td>50.70</td>
+      <td>41.27</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+    <div style="margin: 20px;">
+        <h1>Ranking RP</h1>
+        <div class="filter-buttons">
+            <button id="filter-A-3">A</button>
+            <button id="filter-B-3">B</button>
+            <button id="filter-all-3">Alle</button>
+        </div>
+        <table border="1" class="dataframe display nowrap" id="table3">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Naam</th>
+      <th>Klasse</th>
+      <th>Gem. RP</th>
+      <th>05/09/2024</th>
+      <th>12/09/2024</th>
+      <th>19/09/2024</th>
+      <th>26/09/2024</th>
+      <th>03/10/2024</th>
+      <th>10/10/2024</th>
+      <th>17/10/2024</th>
+      <th>24/10/2024</th>
+      <th>31/10/2024</th>
+      <th>05/11/2024</th>
+      <th>14/11/2024</th>
+      <th>21/11/2024</th>
+      <th>28/11/2024</th>
+      <th>05/12/2024</th>
+      <th>12/12/2024</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TORREELE Ronald</td>
+      <td>A</td>
+      <td>97.01</td>
+      <td>100.00</td>
+      <td>100.00</td>
+      <td>100.00</td>
+      <td>88.61</td>
+      <td>100.00</td>
+      <td>100.00</td>
+      <td>100.00</td>
+      <td>100.00</td>
+      <td>83.16</td>
+      <td>89.11</td>
+      <td>100.00</td>
+      <td>100.00</td>
+      <td>100.00</td>
+      <td>94.28</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>VANDENBERGHE Riet</td>
+      <td>A</td>
+      <td>92.03</td>
+      <td></td>
+      <td></td>
+      <td>92.58</td>
+      <td>85.86</td>
+      <td>96.83</td>
+      <td>88.72</td>
+      <td>96.17</td>
+      <td>87.71</td>
+      <td></td>
+      <td>100.00</td>
+      <td></td>
+      <td>89.70</td>
+      <td></td>
+      <td>90.72</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>FARASYN Kurt</td>
+      <td>A</td>
+      <td>89.11</td>
+      <td>98.80</td>
+      <td>90.17</td>
+      <td>91.84</td>
+      <td>100.00</td>
+      <td>91.28</td>
+      <td>89.96</td>
+      <td>73.68</td>
+      <td>81.75</td>
+      <td>78.71</td>
+      <td>87.22</td>
+      <td>92.46</td>
+      <td>98.27</td>
+      <td>88.92</td>
+      <td>79.14</td>
+      <td>94.45</td>
+    </tr>
+    <tr>
+      <td>MEURRENS Rita</td>
+      <td>A</td>
+      <td>87.74</td>
+      <td></td>
+      <td>82.83</td>
+      <td>60.94</td>
+      <td>96.66</td>
+      <td></td>
+      <td>82.26</td>
+      <td>98.13</td>
+      <td></td>
+      <td>81.86</td>
+      <td></td>
+      <td></td>
+      <td>96.64</td>
+      <td>86.11</td>
+      <td>100.00</td>
+      <td>91.91</td>
+    </tr>
+    <tr>
+      <td>COENE Dominique</td>
+      <td>A</td>
+      <td>85.03</td>
+      <td>90.43</td>
+      <td>78.50</td>
+      <td>79.73</td>
+      <td>90.37</td>
+      <td>90.88</td>
+      <td>82.95</td>
+      <td>94.30</td>
+      <td>81.48</td>
+      <td>74.58</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>87.03</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>CLOETENS Annelies</td>
+      <td>A</td>
+      <td>82.39</td>
+      <td>90.20</td>
+      <td>78.00</td>
+      <td>83.69</td>
+      <td></td>
+      <td></td>
+      <td>81.57</td>
+      <td>85.76</td>
+      <td>86.72</td>
+      <td>87.18</td>
+      <td></td>
+      <td></td>
+      <td>71.06</td>
+      <td>78.00</td>
+      <td></td>
+      <td>81.73</td>
+    </tr>
+    <tr>
+      <td>WYBO Monique</td>
+      <td>B</td>
+      <td>78.14</td>
+      <td>59.11</td>
+      <td></td>
+      <td>78.99</td>
+      <td></td>
+      <td></td>
+      <td>70.30</td>
+      <td>72.70</td>
+      <td>72.99</td>
+      <td></td>
+      <td>71.97</td>
+      <td>92.46</td>
+      <td>82.77</td>
+      <td>90.17</td>
+      <td>78.00</td>
+      <td>90.09</td>
+    </tr>
+    <tr>
+      <td>D'HONDT Kristof</td>
+      <td>B</td>
+      <td>77.39</td>
+      <td>76.33</td>
+      <td>75.83</td>
+      <td>61.69</td>
+      <td>78.00</td>
+      <td>78.00</td>
+      <td>78.00</td>
+      <td>94.11</td>
+      <td>76.60</td>
+      <td>77.29</td>
+      <td>79.96</td>
+      <td>78.00</td>
+      <td></td>
+      <td></td>
+      <td>71.90</td>
+      <td>80.36</td>
+    </tr>
+    <tr>
+      <td>FINAUT Patrick</td>
+      <td>B</td>
+      <td>69.65</td>
+      <td></td>
+      <td></td>
+      <td>78.00</td>
+      <td>52.46</td>
+      <td>64.42</td>
+      <td>75.25</td>
+      <td>78.00</td>
+      <td>73.08</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>61.72</td>
+      <td>74.27</td>
+    </tr>
+    <tr>
+      <td>GHYSELS Marc</td>
+      <td>B</td>
+      <td>67.72</td>
+      <td>60.07</td>
+      <td>70.00</td>
+      <td></td>
+      <td></td>
+      <td>75.13</td>
+      <td>63.56</td>
+      <td>64.54</td>
+      <td>85.18</td>
+      <td></td>
+      <td></td>
+      <td>54.00</td>
+      <td>77.24</td>
+      <td></td>
+      <td></td>
+      <td>59.73</td>
+    </tr>
+    <tr>
+      <td>BOSGAERD Viv</td>
+      <td>B</td>
+      <td>66.48</td>
+      <td></td>
+      <td></td>
+      <td>58.47</td>
+      <td>44.80</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>78.95</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>74.10</td>
+      <td></td>
+      <td></td>
+      <td>76.09</td>
+    </tr>
+    <tr>
+      <td>VANDENBERGHE Christine</td>
+      <td>B</td>
+      <td>66.45</td>
+      <td>79.67</td>
+      <td>50.00</td>
+      <td>36.47</td>
+      <td>43.62</td>
+      <td>87.61</td>
+      <td>58.75</td>
+      <td></td>
+      <td>74.16</td>
+      <td>60.35</td>
+      <td>76.04</td>
+      <td>76.15</td>
+      <td>78.00</td>
+      <td>68.64</td>
+      <td>74.44</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>PETRACCA Marilyn</td>
+      <td>B</td>
+      <td>66.17</td>
+      <td>67.00</td>
+      <td></td>
+      <td>40.67</td>
+      <td>71.91</td>
+      <td>67.40</td>
+      <td>45.82</td>
+      <td>70.54</td>
+      <td>69.46</td>
+      <td>58.28</td>
+      <td>72.70</td>
+      <td>78.92</td>
+      <td>73.99</td>
+      <td>65.52</td>
+      <td></td>
+      <td>78.00</td>
+    </tr>
+    <tr>
+      <td>HERWEIJER Catharina</td>
+      <td>B</td>
+      <td>58.06</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>74.04</td>
+      <td></td>
+      <td>62.87</td>
+      <td>62.87</td>
+      <td></td>
+      <td>40.46</td>
+      <td>38.00</td>
+      <td>68.25</td>
+      <td>60.06</td>
+      <td>60.58</td>
+      <td>55.45</td>
+    </tr>
+    <tr>
+      <td>VANDESOMPELE Mireille</td>
+      <td>B</td>
+      <td>56.12</td>
+      <td>66.28</td>
+      <td>16.33</td>
+      <td>18.18</td>
+      <td>37.73</td>
+      <td>67.30</td>
+      <td>67.41</td>
+      <td>75.64</td>
+      <td>77.05</td>
+      <td>59.48</td>
+      <td></td>
+      <td>62.77</td>
+      <td></td>
+      <td>47.73</td>
+      <td>61.60</td>
+      <td>72.09</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+    <div style="margin: 20px;">
+        <h1>Ranking punten</h1>
+        <div class="filter-buttons">
+            <button id="filter-A-4">A</button>
+            <button id="filter-B-4">B</button>
+            <button id="filter-all-4">Alle</button>
+        </div>
+        <table border="1" class="dataframe display nowrap" id="table4">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Naam</th>
+      <th>Klasse</th>
+      <th>Tot. punten</th>
+      <th>05/09/2024</th>
+      <th>12/09/2024</th>
+      <th>19/09/2024</th>
+      <th>26/09/2024</th>
+      <th>03/10/2024</th>
+      <th>10/10/2024</th>
+      <th>17/10/2024</th>
+      <th>24/10/2024</th>
+      <th>31/10/2024</th>
+      <th>05/11/2024</th>
+      <th>14/11/2024</th>
+      <th>21/11/2024</th>
+      <th>28/11/2024</th>
+      <th>05/12/2024</th>
+      <th>12/12/2024</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TORREELE Ronald</td>
+      <td>A</td>
+      <td>159</td>
+      <td>10</td>
+      <td>9</td>
+      <td>13</td>
+      <td>8</td>
+      <td>11</td>
+      <td>13</td>
+      <td>13</td>
+      <td>14</td>
+      <td>9</td>
+      <td>7</td>
+      <td>9</td>
+      <td>11</td>
+      <td>9</td>
+      <td>10</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>FARASYN Kurt</td>
+      <td>A</td>
+      <td>132</td>
+      <td>9</td>
+      <td>8</td>
+      <td>11</td>
+      <td>11</td>
+      <td>9</td>
+      <td>12</td>
+      <td>5</td>
+      <td>10</td>
+      <td>7</td>
+      <td>6</td>
+      <td>8</td>
+      <td>10</td>
+      <td>7</td>
+      <td>7</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>VANDENBERGHE Riet</td>
+      <td>A</td>
+      <td>89</td>
+      <td></td>
+      <td></td>
+      <td>12</td>
+      <td>7</td>
+      <td>10</td>
+      <td>11</td>
+      <td>11</td>
+      <td>13</td>
+      <td></td>
+      <td>8</td>
+      <td></td>
+      <td>8</td>
+      <td></td>
+      <td>9</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>MEURRENS Rita</td>
+      <td>A</td>
+      <td>88</td>
+      <td></td>
+      <td>7</td>
+      <td>5</td>
+      <td>10</td>
+      <td></td>
+      <td>9</td>
+      <td>12</td>
+      <td></td>
+      <td>8</td>
+      <td></td>
+      <td></td>
+      <td>9</td>
+      <td>6</td>
+      <td>11</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>COENE Dominique</td>
+      <td>A</td>
+      <td>82</td>
+      <td>8</td>
+      <td>6</td>
+      <td>9</td>
+      <td>9</td>
+      <td>8</td>
+      <td>10</td>
+      <td>10</td>
+      <td>9</td>
+      <td>5</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>8</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>D'HONDT Kristof</td>
+      <td>B</td>
+      <td>77</td>
+      <td>5</td>
+      <td>4</td>
+      <td>6</td>
+      <td>6</td>
+      <td>6</td>
+      <td>7</td>
+      <td>9</td>
+      <td>6</td>
+      <td>6</td>
+      <td>5</td>
+      <td>5</td>
+      <td></td>
+      <td></td>
+      <td>4</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>CLOETENS Annelies</td>
+      <td>A</td>
+      <td>76</td>
+      <td>7</td>
+      <td>5</td>
+      <td>10</td>
+      <td></td>
+      <td></td>
+      <td>8</td>
+      <td>8</td>
+      <td>12</td>
+      <td>10</td>
+      <td></td>
+      <td></td>
+      <td>2</td>
+      <td>5</td>
+      <td></td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>WYBO Monique</td>
+      <td>B</td>
+      <td>62</td>
+      <td>1</td>
+      <td></td>
+      <td>8</td>
+      <td></td>
+      <td></td>
+      <td>5</td>
+      <td>4</td>
+      <td>3</td>
+      <td></td>
+      <td>2</td>
+      <td>8</td>
+      <td>7</td>
+      <td>8</td>
+      <td>6</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>VANDENBERGHE Christine</td>
+      <td>B</td>
+      <td>53</td>
+      <td>6</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>7</td>
+      <td>2</td>
+      <td></td>
+      <td>5</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>6</td>
+      <td>4</td>
+      <td>5</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>PETRACCA Marilyn</td>
+      <td>B</td>
+      <td>45</td>
+      <td>4</td>
+      <td></td>
+      <td>3</td>
+      <td>5</td>
+      <td>3</td>
+      <td>1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3</td>
+      <td>6</td>
+      <td>3</td>
+      <td>3</td>
+      <td></td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>VANDESOMPELE Mireille</td>
+      <td>B</td>
+      <td>38</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>4</td>
+      <td>6</td>
+      <td>7</td>
+      <td>3</td>
+      <td></td>
+      <td>3</td>
+      <td></td>
+      <td>1</td>
+      <td>2</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>FINAUT Patrick</td>
+      <td>B</td>
+      <td>37</td>
+      <td></td>
+      <td></td>
+      <td>7</td>
+      <td>4</td>
+      <td>1</td>
+      <td>6</td>
+      <td>7</td>
+      <td>4</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>GHYSELS Marc</td>
+      <td>B</td>
+      <td>36</td>
+      <td>2</td>
+      <td>3</td>
+      <td></td>
+      <td></td>
+      <td>5</td>
+      <td>3</td>
+      <td>2</td>
+      <td>11</td>
+      <td></td>
+      <td></td>
+      <td>2</td>
+      <td>5</td>
+      <td></td>
+      <td></td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>BOSGAERD Viv</td>
+      <td>B</td>
+      <td>25</td>
+      <td></td>
+      <td></td>
+      <td>4</td>
+      <td>3</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>8</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>4</td>
+      <td></td>
+      <td></td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>HERWEIJER Catharina</td>
+      <td>B</td>
+      <td>14</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>4</td>
+      <td></td>
+      <td>1</td>
+      <td>1</td>
+      <td></td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#table1').DataTable();
+
+            // Initialize Table 2 with sorting on column 5
+            var table2 = $('#table2').DataTable({
+                scrollX: true,
+                autoWidth: false,
+                order: [[4, 'desc']], // Sort on column 5 (index 4),
+                columnDefs: [ { targets: '_all', orderable: false,  width: '120px' } ]
+            });
+            table2.columns.adjust();
+
+            // Initialize Table 3 with sorting on column 2
+            var table3 = $('#table3').DataTable({
+                scrollX: true,
+                autoWidth: false,
+                order: [[2, 'desc']], // Sort on column 2 (index 1)
+                columnDefs: [ { targets: '_all', orderable: false, width: '120px' } ]
+            });
+            table3.columns.adjust();
+
+            // Initialize Table 4 with sorting on column 2
+            var table4 = $('#table4').DataTable({
+                scrollX: true,
+                autoWidth: false,
+                order: [[2, 'desc']], // Sort on column 2 (index 1)
+                columnDefs: [ { targets: '_all', orderable: false, width: '120px' } ]
+            });
+            table4.columns.adjust();
+
+
+            // Filter buttons for Table 2
+            $('#filter-A-2').on('click', function() {
+                table2.column(1).search('^A$', true, false).draw();
+            });
+            $('#filter-B-2').on('click', function() {
+                table2.column(1).search('^B$', true, false).draw();
+            });
+            $('#filter-all-2').on('click', function() {
+                table2.column(1).search('').draw();
+            });
+
+            // Filter buttons for Table 3
+            $('#filter-A-3').on('click', function() {
+                table3.column(1).search('^A$', true, false).draw();
+            });
+            $('#filter-B-3').on('click', function() {
+                table3.column(1).search('^B$', true, false).draw();
+            });
+            $('#filter-all-3').on('click', function() {
+                table3.column(1).search('').draw();
+            });
+
+            // Filter buttons for Table 4
+            $('#filter-A-4').on('click', function() {
+                table4.column(1).search('^A$', true, false).draw();
+            });
+            $('#filter-B-4').on('click', function() {
+                table4.column(1).search('^B$', true, false).draw();
+            });
+            $('#filter-all-4').on('click', function() {
+                table4.column(1).search('').draw();
+            });
+        });
+    </script>
+</body>
+</html>
